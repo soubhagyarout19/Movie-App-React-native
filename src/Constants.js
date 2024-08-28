@@ -1,0 +1,5 @@
+export const IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
+
+export const apiKey = "f43ec82a5f24fe6190891894b7436c7a";
+
+export const authorizationToken = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZGJmYjg5M2JiNjI1MzFhOTJkN2VjOTY3ZGYyOGQyMyIsIm5iZiI6MTcyNDY4NzA0Ny4zNTk5MjYsInN1YiI6IjY2Y2M5YjMzMjVmMzEwYzNlZmNhZjA0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CqTxeJ9OLfd57dT8Hu57EyjWUzgJaNLXa9a2wlE5Wi4';
