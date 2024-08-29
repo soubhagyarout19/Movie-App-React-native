@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -24,6 +17,17 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import SearchPage from './src/pages/SearchPage';
+import Home from './src/pages/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import Searchbar from './src/atoms/Searchbar';
+import Custombutton from './src/atoms/CustomButton';
+import Shimmer from './src/molecules/Shimmer';
+import MovieDetails from './src/organisms/MovieDetails';
+import TabIcon from './src/atoms/TabIcon';
+import Homeicon from './src/atoms/svg/Homeicon';
+import SearchIcon from './src/atoms/svg/SearchIcon';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -62,8 +66,46 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const Tab = createBottomTabNavigator();
+  
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar backgroundColor="white" barStyle={'dark-content'}/>
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ color, size }) => {
+              let iconName;
+
+              switch (route.name) {
+                case 'Home':
+                  iconName = Homeicon
+                  break;
+                case 'SearchPage':
+                  iconName = SearchIcon
+                  break;
+                default:
+                  iconName = 'home';
+              }
+              return <TabIcon Icon={iconName} size={size} color={color} />;
+            },
+          })}
+        >
+          <Tab.Screen name="Home" component={Home}  options={{ headerShown: false }}/>
+          <Tab.Screen
+            name="SearchPage"
+            component={SearchPage}
+            options={{ headerShown: false }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+  );
+}
+
+
+{/* <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
@@ -71,30 +113,10 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+        <Home/>
+        <SearchPage/>
       </ScrollView>
-    </SafeAreaView>
-  );
-}
+    </SafeAreaView> */}
 
 const styles = StyleSheet.create({
   sectionContainer: {
